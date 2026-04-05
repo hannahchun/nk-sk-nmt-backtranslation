@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=nk_sk_nmt_baseline
-#SBATCH --output=../logs/train_%j.out
-#SBATCH --error=../logs/train_%j.err
+#SBATCH --output=../output/SKtoNK/logs/train_%j.out
+#SBATCH --error=../output/SKtoNK/logs/train_%j.err
 #SBATCH --time=10:00:00
 #SBATCH --mem=16G
 #SBATCH --partition=gpu
@@ -31,7 +31,6 @@ python train.py \
   --default_root_dir ../output/SKtoNK \
   --gradient_clip_val 1.0 \
   --max_epochs 5 \
-  --default_root_dir ../output \
   --gpus 1 \
   --batch_size 4 \
   --num_workers 3
