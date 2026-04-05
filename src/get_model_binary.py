@@ -6,7 +6,7 @@ import yaml
 parser = argparse.ArgumentParser()
 parser.add_argument("--hparams", default=None, type=str)
 parser.add_argument("--model_binary", default=None, type=str)
-parser.add_argument("--output_dir", default='../output/kobart_translation_NKtoSK', type=str)
+parser.add_argument("--output_dir", default='../output/NKtoSK/kobart_translation-model_final', type=str)
 # might need to use different directory names to store the pytorch_model.bin files for the translation model
 
 args = parser.parse_args()
