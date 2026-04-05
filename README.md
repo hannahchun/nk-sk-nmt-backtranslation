@@ -59,6 +59,24 @@ Thrid, the translation performance of the baseline model and the BT model is com
 │           └── train_974291.out
 │       └── kobart_translation-last.ckpt
 │  ├── SKtoNK
+│       ├── kobart_translation-model_final
+│           └── config.json
+│           └── pytorch_model.bin
+│       ├── kobart_translation-model_chp
+│           └── epoch=00-val_loss=2.193.ckpt
+│           └── epoch=01-val_loss=1.868.ckpt
+│           └── epoch=02-val_loss=1.773.ckpt
+│           └── epoch=03-val_loss=1.735.ckpt
+│           └── epoch=04-val_loss=1.755.ckpt
+│       ├── tb_logs
+│           ├── default
+│               ├── version_0
+│                   └── hparams.yaml
+│       ├── logs
+│           └── train_975812.err
+│           └── train_975812.out
+│       └── kobart_translation-last.ckpt
+
 ```
 
 ## Set up the environment
