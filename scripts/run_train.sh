@@ -28,6 +28,7 @@ cd /scratch/hchun7/nk-sk-nmt-backtranslation/src
 python train.py \
   --train_file ../data/bilingual/train.tsv \
   --validation_file ../data/bilingual/val.tsv \
+  --default_root_dir ../output/SKtoNK \
   --gradient_clip_val 1.0 \
   --max_epochs 5 \
   --default_root_dir ../output \
