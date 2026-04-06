@@ -87,6 +87,3 @@ To train the translation model, run `scripts/run_train.sh`.
 ## Obtaining data
 * [North-South Korean bilingual dataset](https://github.com/nth221/KoreanUnificationParallelCorpus)
 * South Korean monolingual dataset
-  
-## Note
-Output folder not commited and pushed to Github because of file size limits.
