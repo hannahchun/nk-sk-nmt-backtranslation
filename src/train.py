@@ -29,12 +29,12 @@ class ArgsBase():
             parents=[parent_parser], add_help=False)
         parser.add_argument('--train_file',
                             type=str,
-                            default='../data/train.tsv',
+                            default='../data/bilingual/train.tsv',
                             help='train file')
 
         parser.add_argument('--validation_file',
                             type=str,
-                            default='../data/val.tsv',
+                            default='../data/bilingual/val.tsv',
                             help='validation file')
 
         parser.add_argument('--batch_size',

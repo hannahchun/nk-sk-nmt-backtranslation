@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=nk_sk_nmt_baseline
-#SBATCH --output=../output/SKtoNK/logs/train_%j.out
-#SBATCH --error=../output/SKtoNK/logs/train_%j.err
-#SBATCH --time=10:00:00
+#SBATCH --output=../output/NKtoSK/logs/train_%j.out
+#SBATCH --error=../output/NKtoSK/logs/train_%j.err
+#SBATCH --time=20:00:00
 #SBATCH --mem=16G
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
@@ -28,7 +28,7 @@ cd /scratch/hchun7/nk-sk-nmt-backtranslation/src
 python train.py \
   --train_file ../data/bilingual/train.tsv \
   --validation_file ../data/bilingual/val.tsv \
-  --default_root_dir ../output/SKtoNK \
+  --default_root_dir ../output/NKtoSK \
   --gradient_clip_val 1.0 \
   --max_epochs 5 \
   --gpus 1 \
