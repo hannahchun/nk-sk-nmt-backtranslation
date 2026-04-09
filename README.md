@@ -20,15 +20,23 @@ Thrid, the translation performance of the baseline model and the BT model is com
 ```sh
 .
 ├── README.md
+├── ProgressNotes.md
 ├── requirements.txt
 ├── .gitignore
 ├── data
 │   ├── bilingual
-│       └── original_bilingual.csv
-│       └── original_bilingual_filtered.csv
-│       └── train.tsv
-│       └── test.tsv
-│       └── val.tsv
+│       ├── original
+│           └── original_bilingual.tsv
+│           └── train.tsv
+│           └── test.tsv
+│           └── val.tsv
+│       ├── filtered
+│           └── train_filtered.tsv
+│           └── train_filtered_ratio.tsv
+│           └── test_filtered.tsv
+│           └── test_filtered_ratio.tsv
+│           └── val_filtered.tsv
+│           └── val_filtered_ratio.tsv
 │   ├── monolingual
 └── src
 │   └── dataset.py
@@ -36,47 +44,48 @@ Thrid, the translation performance of the baseline model and the BT model is com
 │   └── train.py
 ├── scripts
 │   └──bilingual_filter.ipynb
-│   └──train_test_val_split.ipynb
+│   └──train_val_split.py
 │   └──prepare.sh
 │   └──run_train.sh
 ├── output
 │   ├── NKtoSK
-│       ├── kobart_translation-model_final
-│           └── config.json
-│           └── pytorch_model.bin
-│       ├── kobart_translation-model_chp
-│           └── epoch=00-val_loss=2.113.ckpt
-│           └── epoch=01-val_loss=1.982.ckpt
-│           └── epoch=02-val_loss=1.962.ckpt
-│           └── epoch=03-val_loss=2.012.ckpt
-│           └── epoch=04-val_loss=2.054.ckpt
-│       ├── tb_logs
-│           ├── default
-│               ├── version_0
-│                   └── hparams.yaml
-│       ├── logs
-│           └── train_974291.err
-│           └── train_974291.out
-│       └── kobart_translation-last.ckpt
-│  ├── SKtoNK
-│       ├── kobart_translation-model_final
-│           └── config.json
-│           └── pytorch_model.bin
-│       ├── kobart_translation-model_chp
-│           └── epoch=00-val_loss=2.193.ckpt
-│           └── epoch=01-val_loss=1.868.ckpt
-│           └── epoch=02-val_loss=1.773.ckpt
-│           └── epoch=03-val_loss=1.735.ckpt
-│           └── epoch=04-val_loss=1.755.ckpt
-│       ├── tb_logs
-│           ├── default
-│               ├── version_0
-│                   └── hparams.yaml
-│       ├── logs
-│           └── train_975812.err
-│           └── train_975812.out
-│       └── kobart_translation-last.ckpt
-
+│       ├── filtered_bilingual
+│           ├── kobart_translation-model_final
+│               └── config.json
+│               └── pytorch_model.bin
+│           ├── kobart_translation-model_chp
+│               └── epoch=00-val_loss=2.373.ckpt
+│               └── epoch=01-val_loss=2.266.ckpt
+│               └── epoch=02-val_loss=2.254.ckpt
+│               └── epoch=03-val_loss=2.304.ckpt
+│               └── epoch=04-val_loss=2.350.ckpt
+│           ├── tb_logs
+│               ├── default
+│                   ├── version_0
+│                       └── hparams.yaml
+│           ├── logs
+│               └── train_993139.err
+│               └── train_993139.out
+│           └── kobart_translation-last.ckpt
+│   ├── SKtoNK
+│       ├── filtered_bilingual
+│           ├── kobart_translation-model_final
+│               └── config.json
+│               └── pytorch_model.bin
+│           ├── kobart_translation-model_chp
+│               └── epoch=00-val_loss=2.544.ckpt
+│               └── epoch=01-val_loss=2.327.ckpt
+│               └── epoch=02-val_loss=2.344.ckpt
+│               └── epoch=03-val_loss=2.365.ckpt
+│               └── epoch=04-val_loss=2.393.ckpt
+│           ├── tb_logs
+│               ├── default
+│                   ├── version_0
+│                       └── hparams.yaml
+│           ├── logs
+│               └── train_996553.err
+│               └── train_996553.out
+│           └── kobart_translation-last.ckpt
 ```
 
 ## Set up the environment
