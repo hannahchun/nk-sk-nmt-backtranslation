@@ -1,4 +1,5 @@
 # Progress Notes
+The purpose of these notes is to break my bad habit of working on whatever comes up and to keep a record of mistakes I made & how I addressed them.
 
 ## 4/6-4/7
 
