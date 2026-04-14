@@ -37,18 +37,47 @@ Thrid, the translation performance of the baseline model and the BT model is com
 │           └── test_filtered_ratio.tsv
 │           └── val_filtered.tsv
 │           └── val_filtered_ratio.tsv
+│       ├── augmented
+│           └── train_augmented_0.5x.tsv
+│           └── train_augmented_1.0x.tsv
+│           └── train_augmented_1.5x.tsv
+│           └── train_augmented_2.0x.tsv
+│           └── train_augmented_2.5x.tsv
+│           └── train_augmented_3.0x.tsv
+│           └── train_augmented_3.5x.tsv
+│           └── train_augmented_4.0x.tsv
+│           └── train_augmented_4.5x.tsv
 │   ├── monolingual
+│       ├── SK
+│           ├── original
+│               └── original_monolingual_sk_shuffled.tsv
+│   ├── synthetic
+│       └── synthetic_sk_to_nk.tsv
+│       ├── subsets
+│           └── synthetic_sk_to_nk_subset_0.5x.tsv
+│           └── synthetic_sk_to_nk_subset_1.0x.tsv
+│           └── synthetic_sk_to_nk_subset_1.5x.tsv
+│           └── synthetic_sk_to_nk_subset_2.0x.tsv
+│           └── synthetic_sk_to_nk_subset_2.5x.tsv
+│           └── synthetic_sk_to_nk_subset_3.0x.tsv
+│           └── synthetic_sk_to_nk_subset_3.5x.tsv
+│           └── synthetic_sk_to_nk_subset_4.0x.tsv
+│           └── synthetic_sk_to_nk_subset_4.5x.tsv
 └── src
 │   └── dataset.py
 │   └── get_model_binary.py
 │   └── train.py
+│   └── back_translate.py
 ├── scripts
 │   └──bilingual_filter.ipynb
 │   └──train_val_split.py
 │   └──prepare.sh
 │   └──run_train.sh
+│   └──syntheticData_subsets.ipynb
+│   └──back_translate.sh
 ├── output
 │   ├── NKtoSK
+│       ├── augmented_bilingual
 │       ├── filtered_bilingual
 │           ├── kobart_translation-model_final
 │               └── config.json
