@@ -18,9 +18,24 @@ Then, Levenshtein-based filtering was applied to the new train, test, and valida
 | Total | 130,738 | 74,870 | 94,048 | 102,479 |
 
 ### Trained NK -> SK Baseline model with new dataset
+
 Wrote up a detailed step-by-step process in the link below. <br>
 https://hannahchun.tistory.com/133 
 
 ### Trained SK -> NK Baseline model with new dataset
 
 To generate synthetic NK-SK sentence pairs using the South Korean monolingual data, a SK -> NK baseline model was needed. Using the same method as the previous step (with only the input_ids and label_ids switched) a South Korean -> North Korean translation model was fine-tuned. 
+
+## 4/10-4/13
+
+### Creating synthetic North-South Korean sentence pairs using South Korean monolingual data
+
+For back-translation experiments, a total of 395,622 South Korean monolingual sentences from 38 novels were obtained and shuffled to ensure randomness and avoid any ordering bias by book or author.
+
+The monolingual sentences were machine-translated into North Korean using the SK -> NK model, creating synthetic North-South Korean sentence pairs.
+
+### Creating multiple subsets of the synthetic North-South Korean sentence pairs
+
+The synthetic dataset was subsampled into multiple scaled subsets based on the size of the filtered training set (84,376 sentence pairs) to investigate the effect of synthetic data size on NK -> SK translation performance. Subsets corresponding to different proportions of the training data (e.g., 0.5x, 1×, 1.5x, 2×, 2.5x, 3×, 3.5x, 4x, 4.5x) were constructed using random sampling with a fixed seed to ensure reproducibility.
+
+Each corresponding synthetic subset was concatenated with the filtered bilingual training set to create an augmented training set. The validation and test sets were kept fixed across all experiments so that performance differences could be attributed solely to the amount of synthetic training data.
