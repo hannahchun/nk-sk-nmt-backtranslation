@@ -38,4 +38,28 @@ The monolingual sentences were machine-translated into North Korean using the SK
 
 The synthetic dataset was subsampled into multiple scaled subsets based on the size of the filtered training set (84,376 sentence pairs) to investigate the effect of synthetic data size on NK -> SK translation performance. Subsets corresponding to different proportions of the training data (e.g., 0.5x, 1×, 1.5x, 2×, 2.5x, 3×, 3.5x, 4x, 4.5x) were constructed using random sampling with a fixed seed to ensure reproducibility.
 
-Each corresponding synthetic subset was concatenated with the filtered bilingual training set to create an augmented training set. The validation and test sets were kept fixed across all experiments so that performance differences could be attributed solely to the amount of synthetic training data.
+Each corresponding synthetic subset was concatenated with the filtered bilingual training set to create an augmented training set. 
+
+## 4/14-4/15
+
+### Train NK -> SK model on the augmented data (1×, 2×, 3×, 4x)
+Trained NK -> SK translation models using augmented training dataset : filtered bilingual training data + synthetic sentence pairs at multiple scales (1×, 2×, 3×, 4×). All models were trained under the same configuration to ensure fair comparison across different data sizes. Validation and test sets were kept fixed across all experiments so that performance differences could be attributed solely to the amount of synthetic training data.
+
+### Generate translations on the test set for evaluation
+For evaluation, the fixed test set was translated using each trained model, including the baseline and augmented models (1×, 2×, 3×, 4x).
+
+For each model, North Korean input sentences from the test set were used to generate South Korean translations, and the outputs were saved alongside the reference translations in a structured TSV format (nk, ref_sk, hyp_sk).
+
+## 4/16-4/17
+
+### Compare performance of NK -> SK model trained on the augmented data (1×, 2×, 3×, 4x) vs baseline
+
+#### Automatic Evaluation Metrics
+
+| Model | CHRF3 | BERTScore | ? | ? |
+|------|----------|---------------------|-------------------|--------------------------|
+| Baseline | 26.44 | | 0.978482 | |
+| Aug_1.0x   | 26.72  | 0.983028  |  |  |
+| Aug_2.0x  | 26.40  | 0.982857 |   |   |
+| Aug_3.0x | 26.77 | 0.982653 |  |  |
+| Aug_4.0x | 26.59 |  |  |  |
