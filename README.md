@@ -12,7 +12,11 @@ First, a baseline NKtoSK model is trained by fine-tuning the South Korean pretra
 
 Second, South Korean monolingual data, sourced from classic novels is translated into North Korean using the SKtoNK model, producing synthetic North-South Korean sentence pairs. These synthetic data are then combined with the original parallel corpus to train the final NKtoSK model.
 
-Thrid, the translation performance of the baseline model and the BT model is compared. Character n-gram F-score (chrF) is used to take into account the morphological and inflectional variation in Korean. Additionally, a logistic regression classifier is trained on the North-South Korean bilingual dataset to evaluate whether the model correctly performs dialect-aware translation.
+Thrid, the translation performance of the baseline model and the BT model is compared. Character n-gram F-score (chrF) is used to take into account the morphological and inflectional variation in Korean. 
+
+In addition to chrF3, BERTScore is used as a complementary evaluation metric to assess semantic similarity between the generated translations and the references. The purpose of this comparison is to figure out the extent to which semantically adequate translations exhibit low surface overlap, as well as cases where high semantic similarity does not necessarily reflect accurate dialectal transformation.
+
+Additionally, a logistic regression classifier is trained on the North-South Korean bilingual dataset to evaluate whether the model correctly performs dialect-aware translation.
 
 <sub> cf. To ensure domain consistency with the North–South Korean bilingual dataset, sentences for the South Korean monolingual data were selected from classic novels. To avoid copyright issues and reduce time and labor costs, public-domain English novels ([Project Gutenberg](https://www.gutenberg.org/)) were translated into South Korean using the [GPT-4o mini API](https://developers.openai.com/api/docs/models/gpt-4o-mini).</sub>
 
@@ -51,6 +55,7 @@ Thrid, the translation performance of the baseline model and the BT model is com
 │       ├── SK
 │           ├── original
 │               └── original_monolingual_sk_shuffled.tsv
+│               └── original_monolingual.xlsx
 │   ├── synthetic
 │       └── synthetic_sk_to_nk.tsv
 │       ├── subsets
@@ -63,65 +68,70 @@ Thrid, the translation performance of the baseline model and the BT model is com
 │           └── synthetic_sk_to_nk_subset_3.5x.tsv
 │           └── synthetic_sk_to_nk_subset_4.0x.tsv
 │           └── synthetic_sk_to_nk_subset_4.5x.tsv
+│   ├── translation_results
+│       └── aug_1.0x_nk_to_sk_test.tsv
+│       └── aug_2.0x_nk_to_sk_test.tsv
+│       └── aug_3.0x_nk_to_sk_test.tsv
+│       └── aug_4.0x_nk_to_sk_test.tsv
+│       └── baseline_nk_to_sk_test.tsv
 └── src
 │   └── dataset.py
 │   └── get_model_binary.py
 │   └── train.py
 │   └── back_translate.py
+│   └── translate_test.py
+│   └── CHRF.py
 ├── scripts
 │   └──bilingual_filter.ipynb
 │   └──train_val_split.py
 │   └──prepare.sh
 │   └──run_train.sh
+│   └──GPT_translate_final.py
 │   └──syntheticData_subsets.ipynb
 │   └──back_translate.sh
+│   └──run_aug_train.sh
+│   └──translate_test_baseline.sh
+│   └──translate_test_aug.sh
+│   └──bertscore.sh
 ├── output
 │   ├── NKtoSK
 │       ├── augmented_bilingual
+│           ├── aug_1.0x
+│               ├── kobart_translation-model_final
+│                   └── config.json
+│                   └── pytorch_model.bin
+│           ├── aug_2.0x
+│               ├── kobart_translation-model_final
+│                   └── config.json
+│                   └── pytorch_model.bin
+│           ├── aug_3.0x
+│               ├── kobart_translation-model_final
+│                   └── config.json
+│                   └── pytorch_model.bin
+│           ├── aug_4.0x
+│               ├── kobart_translation-model_final
+│                   └── config.json
+│                   └── pytorch_model.bin
 │       ├── filtered_bilingual
 │           ├── kobart_translation-model_final
 │               └── config.json
 │               └── pytorch_model.bin
-│           ├── kobart_translation-model_chp
-│               └── epoch=00-val_loss=2.373.ckpt
-│               └── epoch=01-val_loss=2.266.ckpt
-│               └── epoch=02-val_loss=2.254.ckpt
-│               └── epoch=03-val_loss=2.304.ckpt
-│               └── epoch=04-val_loss=2.350.ckpt
-│           ├── tb_logs
-│               ├── default
-│                   ├── version_0
-│                       └── hparams.yaml
-│           ├── logs
-│               └── train_993139.err
-│               └── train_993139.out
-│           └── kobart_translation-last.ckpt
 │   ├── SKtoNK
 │       ├── filtered_bilingual
 │           ├── kobart_translation-model_final
 │               └── config.json
 │               └── pytorch_model.bin
-│           ├── kobart_translation-model_chp
-│               └── epoch=00-val_loss=2.544.ckpt
-│               └── epoch=01-val_loss=2.327.ckpt
-│               └── epoch=02-val_loss=2.344.ckpt
-│               └── epoch=03-val_loss=2.365.ckpt
-│               └── epoch=04-val_loss=2.393.ckpt
-│           ├── tb_logs
-│               ├── default
-│                   ├── version_0
-│                       └── hparams.yaml
-│           ├── logs
-│               └── train_996553.err
-│               └── train_996553.out
-│           └── kobart_translation-last.ckpt
+
+
+Note: output directory also includes additional training artifacts such as checkpoint files (e.g., .ckpt) and configuration files (e.g., .yaml), which are omitted for brevity.
 ```
+
+Note: Each model directory also includes additional training artifacts such as checkpoint files (e.g., .ckpt) and configuration files (e.g., .yaml), which are omitted for brevity.
 
 ## Set up the environment
 
 If you run the repo on BlueHive you can directly run `scripts/prepare.sh` to use the installed environment under the path.
 To train the translation model, run `scripts/run_train.sh`.
 
-## Obtaining data
+## Obtaining bilingual data
 * [North-South Korean bilingual dataset](https://github.com/nth221/KoreanUnificationParallelCorpus)
-* South Korean monolingual dataset
