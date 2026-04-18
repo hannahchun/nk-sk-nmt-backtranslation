@@ -116,7 +116,7 @@ output data : <br>
 
 ## 4/14-4/16
 
-### Train NK -> SK model on the augmented data (1×, 2×, 3×, 4x)
+### Trained NK -> SK model on the augmented data (1×, 2×, 3×, 4x)
 Trained NK -> SK translation models using augmented training dataset : filtered bilingual training data + synthetic sentence pairs at multiple scales (1×, 2×, 3×, 4×). All models were trained under the same configuration to ensure fair comparison across different data sizes. Validation and test sets were kept fixed across all experiments so that performance differences could be attributed solely to the amount of synthetic training data.
 
 `./src/train.py` <br>
@@ -130,7 +130,7 @@ input data : <br>
 output model : <br>
 `./output/NKtoSK/augmented_bilingual/aug_1.0x` `./output/NKtoSK/augmented_bilingual/aug_2.0x` `./output/NKtoSK/augmented_bilingual/aug_3.0x` `./output/NKtoSK/augmented_bilingual/aug_4.0x`
 
-### Generate translations on the test set for evaluation
+### Generated translations on the test set for evaluation
 For evaluation, the test set was translated using each trained model : the baseline and augmented models (1×, 2×, 3×, 4x).
 
 For each model, North Korean input sentences from the test set were used to generate South Korean translations, and the outputs were saved alongside the reference translations in a structured TSV format (nk, ref_sk, hyp_sk).
@@ -147,3 +147,25 @@ model used: <br>
 
 output data : <br> 
 `./data/translation_results/`
+
+## 4/17
+
+### Compared performance of NK -> SK model trained on the augmented data (1×, 2×, 3×, 4x) vs baseline
+
+#### Automatic Evaluation Metrics
+
+| Model | CHRF3 | BERTScore (F1)|
+|------|----------|---------------------|
+| Baseline | 26.44 | 0.978482 |
+| Aug_1.0x   | 26.72  | 0.983028 |
+| Aug_2.0x  | 26.40  | 0.982857 | 
+| Aug_3.0x | 26.77 | 0.982653 |
+| Aug_4.0x | 26.59 | 0.982942 |
+
+The results indicate that increasing the amount of synthetic data does not lead to consistent performance gains. 
+
+The consistently low CHRF3 scores and high BERTScore suggests that the generated translations have high semantic equivalence but low surface overlap with the references.
+
+The low CHRF3 scores are likely due to many valid translations that differ in their surface form, including paraphrasing, stylistic variation, and lexical differences.
+
+In contrast, the high BERTScore indicates that semantic similarity is largely captured even by the baseline model. However, this may lead to an inflation of translation quality, as BERTScore is less sensitive to dialect-specific lexical and morphosyntactic differences.
