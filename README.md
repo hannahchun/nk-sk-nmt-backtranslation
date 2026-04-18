@@ -126,8 +126,6 @@ Additionally, a logistic regression classifier is trained on the North-South Kor
 Note: output directory also includes additional training artifacts such as checkpoint files (e.g., .ckpt) and configuration files (e.g., .yaml), which are omitted for brevity.
 ```
 
-Note: Each model directory also includes additional training artifacts such as checkpoint files (e.g., .ckpt) and configuration files (e.g., .yaml), which are omitted for brevity.
-
 ## Set up the environment
 
 If you run the repo on BlueHive you can directly run `scripts/prepare.sh` to use the installed environment under the path.
