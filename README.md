@@ -16,7 +16,9 @@ Thrid, the translation performance of the baseline model and the BT model is com
 
 In addition to chrF3, BERTScore is used as a complementary evaluation metric to assess semantic similarity between the generated translations and the references. The purpose of this comparison is to figure out the extent to which semantically adequate translations exhibit low surface overlap, as well as cases where high semantic similarity does not necessarily reflect accurate dialectal transformation.
 
-Additionally, a logistic regression classifier is trained on the North-South Korean bilingual dataset to evaluate whether the model correctly performs dialect-aware translation.
+Additionally, a logistic regression classifier is trained on the North-South Korean bilingual test dataset to assess whether the generated translations from each model show linguistic characteristics specific to South Korean (SK) Korean.
+
+A qualitative analysis was conducted on the translations from each model to examine which lexical and morphosyntactic differences between North and South Korean were successfully captured.
 
 <sub> cf. To ensure domain consistency with the North–South Korean bilingual dataset, sentences for the South Korean monolingual data were selected from classic novels. To avoid copyright issues and reduce time and labor costs, public-domain English novels ([Project Gutenberg](https://www.gutenberg.org/)) were translated into South Korean using the [GPT-4o mini API](https://developers.openai.com/api/docs/models/gpt-4o-mini).</sub>
 
@@ -74,6 +76,22 @@ Additionally, a logistic regression classifier is trained on the North-South Kor
 │       └── aug_3.0x_nk_to_sk_test.tsv
 │       └── aug_4.0x_nk_to_sk_test.tsv
 │       └── baseline_nk_to_sk_test.tsv
+│   ├── classifier_results
+│       └── classifier_summary.csv
+│       └── 1.0x_classifier_scores.tsv
+│       └── 2.0x_classifier_scores.tsv
+│       └── 3.0x_classifier_scores.tsv
+│       └── 4.0x_classifier_scores.tsv
+│       └── baseline_classifier_scores.tsv
+│       └── baseline_high_confidence.tsv
+│       └── baseline_low_confidence.tsv
+│   ├── qualitative_analysis
+│       └── aug_1.0x_nk_to_sk_selected_test.tsv
+│       └── aug_2.0x_nk_to_sk_selected_test.tsv
+│       └── aug_3.0x_nk_to_sk_selected_test.tsv
+│       └── aug_4.0x_nk_to_sk_selected_test.tsv
+│       └── baseline_nk_to_sk_selected_test.tsv
+│       └── selected_test.tsv
 └── src
 │   └── dataset.py
 │   └── get_model_binary.py
@@ -81,6 +99,7 @@ Additionally, a logistic regression classifier is trained on the North-South Kor
 │   └── back_translate.py
 │   └── translate_test.py
 │   └── CHRF.py
+│   └── logistic_classifier.ipynb
 ├── scripts
 │   └──bilingual_filter.ipynb
 │   └──train_val_split.py
@@ -93,6 +112,8 @@ Additionally, a logistic regression classifier is trained on the North-South Kor
 │   └──translate_test_baseline.sh
 │   └──translate_test_aug.sh
 │   └──bertscore.sh
+│   └──translate_selected_test_baseline.sh
+│   └──translate_selected_test_aug.sh
 ├── output
 │   ├── NKtoSK
 │       ├── augmented_bilingual
